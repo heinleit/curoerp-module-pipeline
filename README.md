@@ -1,0 +1,1 @@
+# curoerp-module-pipeline
