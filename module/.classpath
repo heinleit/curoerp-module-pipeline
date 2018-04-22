@@ -2,5 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/hheinle/curoerp/CuroERP-Core_0.0.1_71.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
