@@ -64,7 +64,7 @@ Theoretisch kennen beide Modelle zusätzlich noch die Pipeline, jedoch ist dies 
 
 ### Implementierung
 
-Die Implementierung sollte uns nicht weiter stören oder gar einschränken. Aus dem Grund habe ich auf die standardmäßige implementierung (get/set/delete) verzichtet und mithilfe von Abstraktion (Shared-Projekt) des BusinessLayer dem Entwickler den nötigen Spielraum gegeben.
+Die Implementierung sollte uns nicht weiter stören oder gar einschränken. Aus dem Grund habe ich auf die standardmäßige implementierung get, set und delete gänzlich verzichtet und mithilfe von Abstraktion (Shared-Projekt) des BusinessLayer dem Entwickler den nötigen Spielraum gegeben.
 
 
 
