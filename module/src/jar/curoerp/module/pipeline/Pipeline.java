@@ -1,7 +1,26 @@
 package jar.curoerp.module.pipeline;
 
-public class Pipeline {
-	/*
-	 *	Erstmal nur Platzhalter
-	 */
+import de.curoerp.core.modularity.dependency.IDependencyContainer;
+
+public class Pipeline implements IPipelineService {
+
+	private IDependencyContainer dependencyContainer;
+
+	public Pipeline(IDependencyContainer dependencyContainer) {
+		this.dependencyContainer = dependencyContainer;
+	}
+	
+	@Override
+	public void startServer(int port) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void registerApi(Class<?> cls) {
+		// TODO Auto-generated method stub
+		
+		
+		
+	}
 }

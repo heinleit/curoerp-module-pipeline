@@ -1,0 +1,4 @@
+name: PipelineDemoShared
+version: 1
+typeInfos:
+ - type: jar.curoerp.module.pipeline.demo.shared.PipelineBinder

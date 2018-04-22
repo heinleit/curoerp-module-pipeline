@@ -1,6 +1,5 @@
 package jar.curoerp.module.pipeline;
 
-import java.time.LocalDateTime;
 import java.util.Random;
 
 public class PipelineSession {
@@ -9,6 +8,9 @@ public class PipelineSession {
 	private String host;
 	private int port = -1;
 	private int _random;
+	
+	private static int counter = 0;
+	private int _counter = counter++;
 	
 	private static Random randomizer = new Random();
 
@@ -45,6 +47,6 @@ public class PipelineSession {
 				+ (this.port * 10)
 				+ (this.clientName.hashCode() * 100)
 				+ (this._random * 1000)
-				+ LocalDateTime.now().getSecond() * 10000;
+				+ (this._counter * 10000);
 	}
 }
