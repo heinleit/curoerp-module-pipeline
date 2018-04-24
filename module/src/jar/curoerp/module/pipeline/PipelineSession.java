@@ -27,4 +27,14 @@ public class PipelineSession {
 				+ (this._random * 1000)
 				+ (this._counter * 10000);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		try {
+			PipelineSession other = (PipelineSession) obj;
+			return other.hashCode() == this.hashCode();
+		} catch(ClassCastException e) {
+			return false;
+		}
+	}
 }

@@ -3,7 +3,6 @@ package jar.curoerp.module.pipeline.center;
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
-import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -103,6 +102,8 @@ public class PipelineCenterService implements IPipelineCenterService {
 
 	@Override
 	public void keyFile(File keyStore, String password) {
+		System.out.println(keyStore.toString());
+		System.out.println(password);
 		System.setProperty("javax.net.ssl.keyStore", keyStore.toString());
 		System.setProperty("javax.net.ssl.keyStorePassword", password);
 	}
