@@ -17,9 +17,9 @@ public class ServerBoot implements IBootModule {
 	
 	@Override
 	public void boot() {
-		this._pipelineService.keyFile(new File("/home/hheinle/curoerp/crt/keystore.jks"), "GeheimesKennwort");
+		this._pipelineService.keyFile(new File("resources/keystore.jks"), "password");
 		try {
-			this._pipelineService.start(12388);
+			this._pipelineService.start(2876); //C(2)U(8)R(7)O(6)
 		} catch (PipelineAlreadyListenException | PipelinePortAlreadyInUseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

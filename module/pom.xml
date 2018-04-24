@@ -31,7 +31,7 @@
   		<artifactId>CuroERP-Core</artifactId>
   		<version>0.0.1</version>
 	    <scope>system</scope>
-	    <systemPath>${project.basedir}/resources/CuroERP-Core_0.0.1_72.jar</systemPath>
+	    <systemPath>${project.basedir}/resources/CuroERP-Core_0.0.1.jar</systemPath>
   	</dependency>
   </dependencies>
 </project>

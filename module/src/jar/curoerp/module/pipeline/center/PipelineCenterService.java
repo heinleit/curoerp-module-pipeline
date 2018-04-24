@@ -3,6 +3,7 @@ package jar.curoerp.module.pipeline.center;
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -33,7 +34,9 @@ public class PipelineCenterService implements IPipelineCenterService {
 			SSLServerSocketFactory sslserversocketfactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
 			this._serverSocket = (SSLServerSocket) sslserversocketfactory.createServerSocket(port);
 			LoggingService.debug("ServerSocket on Port '" + port + "' successful started!");
-		} catch (IOException e) {
+		} 
+		catch (IOException e) {
+			LoggingService.debug(e);
 			throw new PipelinePortAlreadyInUseException();
 		}
 
