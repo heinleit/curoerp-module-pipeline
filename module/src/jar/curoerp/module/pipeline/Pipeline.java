@@ -1,13 +1,21 @@
 package jar.curoerp.module.pipeline;
 
+import java.lang.reflect.Proxy;
+
+import de.curoerp.core.logging.LoggingService;
 import de.curoerp.core.modularity.dependency.IDependencyContainer;
+import de.curoerp.core.modularity.exception.DependencyNotResolvedException;
+import jar.curoerp.module.pipeline.interfaces.IPipelineService;
 
 public class Pipeline implements IPipelineService {
 
 	private IDependencyContainer dependencyContainer;
+	private PipelineInvocationHandler invocationHandler;
 
-	public Pipeline(IDependencyContainer dependencyContainer) {
+	public Pipeline(IDependencyContainer dependencyContainer, PipelineInvocationHandler invocationHandler) {
 		this.dependencyContainer = dependencyContainer;
+		this.invocationHandler = invocationHandler;
+		// Register 
 	}
 	
 	@Override
@@ -18,9 +26,11 @@ public class Pipeline implements IPipelineService {
 
 	@Override
 	public void registerApi(Class<?> cls) {
-		// TODO Auto-generated method stub
-		
-		
-		
+		Object obj = Proxy.newProxyInstance(cls.getClassLoader(), new Class<?> [] {cls}, this.invocationHandler);
+		try {
+			this.dependencyContainer.addResolvedDependency(cls, obj);
+		} catch (DependencyNotResolvedException e) {
+			LoggingService.error(e);
+		}
 	}
 }

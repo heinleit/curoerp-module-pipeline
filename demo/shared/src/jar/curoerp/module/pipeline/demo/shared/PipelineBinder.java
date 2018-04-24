@@ -1,6 +1,6 @@
 package jar.curoerp.module.pipeline.demo.shared;
 
-import jar.curoerp.module.pipeline.IPipelineService;
+import jar.curoerp.module.pipeline.interfaces.*;
 
 public class PipelineBinder {
 	

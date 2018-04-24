@@ -1,4 +1,4 @@
-package jar.curoerp.module.pipeline;
+package jar.curoerp.module.pipeline.interfaces;
 
 public interface IPipelineService {
 	

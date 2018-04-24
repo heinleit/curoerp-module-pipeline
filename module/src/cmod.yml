@@ -1,2 +1,6 @@
 name: Pipeline
 version: 0.0.1
+typeInfos:
+ - type: jar.curoerp.module.pipeline.PipelineInvocationHandler
+ - type: jar.curoerp.module.pipeline.Pipeline
+bootClass: jar.curoerp.module.pipeline.Pipeline
