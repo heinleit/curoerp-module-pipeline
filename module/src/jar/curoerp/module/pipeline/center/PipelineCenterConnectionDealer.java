@@ -19,6 +19,14 @@ public class PipelineCenterConnectionDealer {
 	public void deal() {
 		try {
 			BufferedReader bufReader = new BufferedReader(new InputStreamReader(this._socket.getInputStream()));
+			String str = null;
+			while((str = bufReader.readLine()) != null) {
+				if(str.trim().length() == 0) {
+					continue;
+				}
+				
+				System.out.println(str);
+			}
 		} catch (IOException e) {
 			this._troubleSince = Instant.now();
 			return;
