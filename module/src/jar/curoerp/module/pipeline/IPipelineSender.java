@@ -1,4 +1,6 @@
-package jar.curoerp.module.pipeline.shared;
+package jar.curoerp.module.pipeline;
+
+import jar.curoerp.module.pipeline.helper.PipelineRequest;
 
 public interface IPipelineSender {
 	public Object sendAndReceive(PipelineRequest request);

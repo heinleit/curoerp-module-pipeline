@@ -1,14 +1,31 @@
-package jar.curoerp.module.pipeline.shared;
+package jar.curoerp.module.pipeline.helper;
 
 import java.io.IOException;
 import java.security.MessageDigest;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.*;
 
-public class PipelineSharedHelper {
-
+public class PipelineHelper {
+	public static PipelineTag parseTag(String tag, String line) {
+		tag = tag.trim();
+		line = line.trim();
+		if(line.matches("#" + tag.toUpperCase() + ";[0-9]*;[a-zA-Z0-9]*;[a-fA-F0-9]{64};[a-zA-Z0-9_.]*;")) {
+			String[] parts = line.split(";");
+			int id = Integer.parseInt(parts[1]);
+			PipelineType type = PipelineType.valueOf(parts[2]);
+			String hash = parts[3];
+			String cls = parts[4];
+			try {
+				return new PipelineTag(id, type, hash, Class.forName(cls));
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
 	public static String sha256(String base) {
 		try{
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -66,5 +83,4 @@ public class PipelineSharedHelper {
 		stmt.append("#END" + tagInfo + "\n");
 		return stmt.toString();
 	}
-
 }

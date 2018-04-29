@@ -1,4 +1,4 @@
-package jar.curoerp.module.pipeline.shared;
+package jar.curoerp.module.pipeline.helper;
 
 public class PipelineTag {
 	private int id;
@@ -43,6 +43,6 @@ public class PipelineTag {
 	}
 
 	public boolean validateContent(String content) {
-		return this.hash.equalsIgnoreCase(PipelineSharedHelper.sha256(content));
+		return this.hash.equalsIgnoreCase(PipelineHelper.sha256(content));
 	}
 }

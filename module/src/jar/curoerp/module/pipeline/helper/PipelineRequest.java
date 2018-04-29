@@ -1,4 +1,4 @@
-package jar.curoerp.module.pipeline.shared;
+package jar.curoerp.module.pipeline.helper;
 
 public class PipelineRequest {
 	public String cls;
