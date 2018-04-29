@@ -2,28 +2,25 @@ package jar.curoerp.module.pipeline.demo.client;
 
 import javax.swing.JOptionPane;
 
-import jar.curoerp.module.pipeline.demo.shared.Apple;
-import jar.curoerp.module.pipeline.demo.shared.IAppleModel;
+import jar.curoerp.module.pipeline.shared.business.IApplePie;
+import jar.curoerp.module.pipeline.shared.models.Apple;
 
 public class ApfelController  {
 
-	private IAppleModel _appleModel;
-	private Apple[] _apple;
+	private IApplePie _appleModel;
+	private Apple _apple;
 
-	public ApfelController(IAppleModel apfelModel) {
+	public ApfelController(IApplePie apfelModel) {
 		this._appleModel = apfelModel;
 	}
-	
+
 	public void show() {
-		this._apple = this._appleModel.getApples();
+		this._apple = this._appleModel.getApple();
 		this.showDialog();
 	}
 
 	private void showDialog() {
-		for (Apple apfel : _apple) {
-			// our 'view'^^ (thats real cheating)
-			JOptionPane.showMessageDialog(null, apfel.kind);
-		}
+		JOptionPane.showMessageDialog(null, _apple.kind);
 	}
 
 }

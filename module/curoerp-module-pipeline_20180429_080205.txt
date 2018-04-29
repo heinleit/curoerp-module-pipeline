@@ -1,0 +1,11 @@
+ERROR - 08:02:05: java.io.FileNotFoundException: /curoerp-module-pipeline/src/jar/curoerp/module/pipeline/center/PipelineCenterConnectionDealer.java (Datei oder Verzeichnis nicht gefunden)
+ERROR - 08:02:06: java.io.FileNotFoundException: /curoerp-module-pipeline/src/jar/curoerp/module/pipeline/center/PipelineCenterConnectionDealer.java (Datei oder Verzeichnis nicht gefunden)
+WARNING - 08:02:10: Convert curoerp-module-pipeline
+ERROR - 08:02:10: java.io.FileNotFoundException: /curoerp-module-pipeline/src/jar/curoerp/module/pipeline/center/PipelineCenterConnectionDealer.java (Datei oder Verzeichnis nicht gefunden)
+ERROR - 08:02:10: java.io.FileNotFoundException: /curoerp-module-pipeline/src/jar/curoerp/module/pipeline/center/PipelineCenterConnectionDealer.java (Datei oder Verzeichnis nicht gefunden)
+WARNING - 08:02:26: Convert curoerp-module-pipeline
+ERROR - 08:02:26: java.io.FileNotFoundException: /curoerp-module-pipeline/src/jar/curoerp/module/pipeline/center/PipelineCenterConnectionDealer.java (Datei oder Verzeichnis nicht gefunden)
+ERROR - 08:02:26: java.io.FileNotFoundException: /curoerp-module-pipeline/src/jar/curoerp/module/pipeline/center/PipelineCenterConnectionDealer.java (Datei oder Verzeichnis nicht gefunden)
+WARNING - 08:02:34: Convert curoerp-module-pipeline
+ERROR - 08:02:34: java.io.FileNotFoundException: /curoerp-module-pipeline/src/jar/curoerp/module/pipeline/center/PipelineCenterConnectionDealer.java (Datei oder Verzeichnis nicht gefunden)
+ERROR - 08:02:34: java.io.FileNotFoundException: /curoerp-module-pipeline/src/jar/curoerp/module/pipeline/center/PipelineCenterConnectionDealer.java (Datei oder Verzeichnis nicht gefunden)

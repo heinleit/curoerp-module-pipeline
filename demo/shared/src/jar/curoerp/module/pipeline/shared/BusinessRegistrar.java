@@ -5,11 +5,8 @@ import jar.curoerp.module.pipeline.shared.business.IApplePie;
 
 public class BusinessRegistrar {
 	
-	public BusinessRegistrar(IPipelineService pipelineService) {
-		
-		// Register Interfaces
-		pipelineService.registerApi(IApplePie.class);
-		
+	public static void register(IPipelineService registrar) {
+		registrar.register(IApplePie.class);
 	}
 
 }

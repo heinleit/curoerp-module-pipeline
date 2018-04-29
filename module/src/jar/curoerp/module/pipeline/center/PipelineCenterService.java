@@ -12,6 +12,7 @@ import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 
 import de.curoerp.core.logging.LoggingService;
+import de.curoerp.core.modularity.dependency.IDependencyContainer;
 import jar.curoerp.module.pipeline.exceptions.PipelineAlreadyListenException;
 import jar.curoerp.module.pipeline.exceptions.PipelinePortAlreadyInUseException;
 import jar.curoerp.module.pipeline.interfaces.IPipelineCenterService;
@@ -20,6 +21,11 @@ public class PipelineCenterService implements IPipelineCenterService {
 
 	private SSLServerSocket _serverSocket;
 	private List<PipelineCenterConnectionDealer> _dealer = new ArrayList<>();
+	private IDependencyContainer _dependencyContainer;
+	
+	public PipelineCenterService(IDependencyContainer dependencyContainer) {
+		this._dependencyContainer = dependencyContainer;
+	}
 
 	@Override
 	public void start(int port) throws PipelineAlreadyListenException, PipelinePortAlreadyInUseException {
@@ -54,6 +60,11 @@ public class PipelineCenterService implements IPipelineCenterService {
 	private void collect() {
 		for (PipelineCenterConnectionDealer dealer : this._dealer.toArray(new PipelineCenterConnectionDealer[this._dealer.size()])) {
 			try {
+				// Dealer is null?
+				if(dealer == null) {
+					continue;
+				}
+				
 				// Socket is shuted down?
 				if(this._serverSocket == null) {
 					this.close(dealer);
@@ -79,7 +90,7 @@ public class PipelineCenterService implements IPipelineCenterService {
 			try {
 				while(this._serverSocket != null) {
 					Socket socket = this._serverSocket.accept();
-					PipelineCenterConnectionDealer dealer = new PipelineCenterConnectionDealer(socket);
+					PipelineCenterConnectionDealer dealer = new PipelineCenterConnectionDealer(socket, this._dependencyContainer);
 					this._dealer.add(dealer);
 				}
 			} catch (Exception e) {
