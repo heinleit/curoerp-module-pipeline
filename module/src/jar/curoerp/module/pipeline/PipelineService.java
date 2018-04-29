@@ -3,15 +3,15 @@ package jar.curoerp.module.pipeline;
 import java.io.IOException;
 import java.net.Socket;
 
+import jar.curoerp.module.pipeline.helper.PipelineRequest;
 import jar.curoerp.module.pipeline.processor.IPipelineReceptionist;
 import jar.curoerp.module.pipeline.processor.PipelineProcessor;
-import jar.curoerp.module.pipeline.receptionist.PipelineReceptionist;
+import jar.curoerp.module.pipeline.proxy.IProxyRequestListener;
 import jar.curoerp.module.pipeline.sender.PipelineSender;
-
 import jar.curoerp.module.pipeline.transfer.IPipelineTransferReceiver;
 import jar.curoerp.module.pipeline.transfer.PipelineTransfer;
 
-public abstract class PipelineService {
+public class PipelineService implements IProxyRequestListener {
 
 	private PipelineStorage storage;
 	private PipelineTransfer transfer;
@@ -19,10 +19,13 @@ public abstract class PipelineService {
 	private IPipelineSender sender;
 	private IPipelineReceptionist receptionist;
 
-	public PipelineService(Socket socket) {
+	public PipelineService(Socket socket, IPipelineReceptionist receptionist) {
 		// Storage (Helper)
 		this.storage = new PipelineStorage();
 		this.storage.setSocket(socket);
+		
+		// Receptionist (3rd Layer)
+		this.receptionist = receptionist;
 
 		// Transfer (1st Layer)
 		this.transfer = new PipelineTransfer(this.storage);
@@ -30,12 +33,9 @@ public abstract class PipelineService {
 		// Sender (2nd Layer)
 		this.sender = new PipelineSender(this.transfer, this.storage);
 
-		// Receptionist (3rd Layer)
-		this.receptionist = new PipelineReceptionist();
-
 		// Processor (4th Layer)
 		this.processor = new PipelineProcessor(this.receptionist, this.sender, this.storage);
-		this.transfer.addReceiver((IPipelineTransferReceiver) this.sender);
+		this.transfer.addReceiver(this.processor);
 	}
 
 	public void start() {
@@ -44,6 +44,11 @@ public abstract class PipelineService {
 		new Thread(() -> {
 			while(this.storage.isSocketOpen()) {
 				this.processor.heartbeat();
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}).start();
 	}
@@ -55,6 +60,11 @@ public abstract class PipelineService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public Object sendAndReceive(PipelineRequest request) {
+		return this.sender.sendAndReceive(request);
 	}
 
 }

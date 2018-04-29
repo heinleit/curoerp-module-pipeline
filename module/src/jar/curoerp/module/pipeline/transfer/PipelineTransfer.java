@@ -38,6 +38,7 @@ public class PipelineTransfer implements IPipelineTransfer {
 				try {
 					BufferedReader reader = new BufferedReader(new InputStreamReader(this.storage.getSocketInputStream()));
 					String line = null;
+					System.out.println("Wait for new line");
 					while((line = reader.readLine()) != null) {
 						System.out.println("New Line: " + line);
 						for (IPipelineTransferReceiver receiver : this.receivers) {
@@ -71,7 +72,8 @@ public class PipelineTransfer implements IPipelineTransfer {
 						next = this.storage.next();
 						if(next != null) {
 							writer.println(next);
-							System.out.println("Send: " + next);
+							writer.flush();
+							System.out.println("Sended: " + next);
 						}
 						Thread.sleep(1000);
 					}

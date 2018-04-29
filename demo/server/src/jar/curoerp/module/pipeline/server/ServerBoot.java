@@ -4,17 +4,17 @@ import java.io.File;
 
 import de.curoerp.core.functionality.config.IConfigService;
 import de.curoerp.core.modularity.module.IBootModule;
-import jar.curoerp.module.pipeline.exceptions.PipelineAlreadyListenException;
-import jar.curoerp.module.pipeline.exceptions.PipelinePortAlreadyInUseException;
-import jar.curoerp.module.pipeline.interfaces.IPipelineCenterService;
+import jar.curoerp.module.pipeline.PipelineAlreadyListenException;
+import jar.curoerp.module.pipeline.PipelinePortAlreadyInUseException;
+import jar.curoerp.module.pipeline.PipelineServerService;
 
 public class ServerBoot implements IBootModule {
 
-	private IPipelineCenterService _pipelineService;
+	private PipelineServerService server;
 	private IConfigService _configService;
 
-	public ServerBoot(IPipelineCenterService pipelineService, IConfigService configService) {
-		this._pipelineService = pipelineService;
+	public ServerBoot(PipelineServerService server, IConfigService configService) {
+		this.server = server;
 		this._configService = configService;
 	}
 	
@@ -22,8 +22,8 @@ public class ServerBoot implements IBootModule {
 	public void boot() {
 		try {
 			PipelineServerConfig config = _configService.loadConfig("pipeline-server", PipelineServerConfig.class).instance;
-			this._pipelineService.keyFile(new File(config.KeyFile), config.KeyPassword);
-			this._pipelineService.start(config.Port); //C(2)U(8)R(7)O(6)
+			this.server.keyFile(new File(config.KeyFile), config.KeyPassword);
+			this.server.start(config.Port); //C(2)U(8)R(7)O(6)
 		} catch (PipelineAlreadyListenException | PipelinePortAlreadyInUseException | NullPointerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
