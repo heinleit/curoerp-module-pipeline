@@ -31,7 +31,7 @@
   		<artifactId>CuroERP-Core</artifactId>
   		<version>0.0.1</version>
 	    <scope>system</scope>
-	    <systemPath>${project.basedir}/resources/CuroERP-Core_0.0.1.jar</systemPath>
+	    <systemPath>${project.basedir}/../lib/CuroERP-Core.jar</systemPath>
   	</dependency>
 	 <dependency>
 	   <groupId>com.fasterxml.jackson.core</groupId>
