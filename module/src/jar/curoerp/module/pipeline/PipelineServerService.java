@@ -9,7 +9,7 @@ import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 
 import de.curoerp.core.logging.LoggingService;
-import jar.curoerp.module.pipeline.processor.IPipelineReceptionist;
+import jar.curoerp.module.pipeline.receptionist.IPipelineReceptionist;
 
 public class PipelineServerService {
 

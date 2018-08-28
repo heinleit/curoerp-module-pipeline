@@ -2,7 +2,7 @@ package jar.curoerp.module.pipeline;
 
 import java.net.Socket;
 
-import jar.curoerp.module.pipeline.processor.IPipelineReceptionist;
+import jar.curoerp.module.pipeline.receptionist.IPipelineReceptionist;
 
 public class PipelineServerConnector {
 

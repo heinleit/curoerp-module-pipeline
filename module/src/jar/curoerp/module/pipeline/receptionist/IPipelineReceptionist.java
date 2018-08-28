@@ -1,4 +1,4 @@
-package jar.curoerp.module.pipeline.processor;
+package jar.curoerp.module.pipeline.receptionist;
 
 import jar.curoerp.module.pipeline.helper.PipelineRequest;
 

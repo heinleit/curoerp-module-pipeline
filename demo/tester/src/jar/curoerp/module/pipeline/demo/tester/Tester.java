@@ -3,6 +3,8 @@ package jar.curoerp.module.pipeline.demo.tester;
 import java.io.File;
 
 import de.curoerp.core.exception.RuntimeTroubleException;
+import de.curoerp.core.functionality.config.ConfigService;
+import de.curoerp.core.functionality.config.IConfigService;
 import de.curoerp.core.functionality.info.CoreInfo;
 import de.curoerp.core.functionality.info.ICoreInfo;
 import de.curoerp.core.logging.Logging;
@@ -30,6 +32,8 @@ public class Tester {
 		DependencyService service = new DependencyService(container);
 		CoreInfo cInfo = new CoreInfo("PipelineDemoServer".toLowerCase(), new File("../../test/"));
 		container.addResolvedDependency(CoreInfo.class, cInfo);
+		ConfigService cfg = new ConfigService(cInfo);
+		container.addResolvedDependency(IConfigService.class, cfg);
 		
 		ModuleService modules = new ModuleService(service, container, cInfo);
 		
@@ -40,8 +44,11 @@ public class Tester {
 			ModuleInfo info = new ModuleInfo();
 			info.name = "Pipeline";
 			info.typeInfos = new TypeInfo[] {
-					new TypeInfo("jar.curoerp.module.pipeline.PipelineInvocationHandler", ""),
-					new TypeInfo("jar.curoerp.module.pipeline.Pipeline", "")
+					new TypeInfo("jar.curoerp.module.pipeline.PipelineRegistrar", "jar.curoerp.module.pipeline.IPipelineRegistrar"),
+					new TypeInfo("jar.curoerp.module.pipeline.PipelineServerService", ""),
+					new TypeInfo("jar.curoerp.module.pipeline.proxy.ProxyHandler", ""),
+					new TypeInfo("jar.curoerp.module.pipeline.receptionist.PipelineReceptionist", "jar.curoerp.module.pipeline.receptionist.IPipelineReceptionist"),
+					new TypeInfo("jar.curoerp.module.pipeline.proxy.PipelineSenderProxy", "jar.curoerp.module.pipeline.proxy.IPipelineSenderProxy"),
 			};
 			Module pipeline = new Module(new VersionInfo("1"), info);
 			
@@ -57,7 +64,7 @@ public class Tester {
 			info = new ModuleInfo();
 			info.name = "PipelineDemoServer";
 			info.typeInfos = new TypeInfo[] {
-					new TypeInfo("jar.curoerp.module.pipeline.demo.server.ApplePie", "jar.curoerp.module.pipeline.demo.server.IApplePie"),
+					new TypeInfo("jar.curoerp.module.pipeline.demo.server.ApplePie", "jar.curoerp.module.pipeline.shared.business.IApplePie"),
 					new TypeInfo("jar.curoerp.module.pipeline.server.ServerBoot", "")
 			};
 			info.bootClass = "jar.curoerp.module.pipeline.server.ServerBoot";

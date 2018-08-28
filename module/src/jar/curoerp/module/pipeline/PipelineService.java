@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.Socket;
 
 import jar.curoerp.module.pipeline.helper.PipelineRequest;
-import jar.curoerp.module.pipeline.processor.IPipelineReceptionist;
 import jar.curoerp.module.pipeline.processor.PipelineProcessor;
 import jar.curoerp.module.pipeline.proxy.IProxyRequestListener;
+import jar.curoerp.module.pipeline.receptionist.IPipelineReceptionist;
 import jar.curoerp.module.pipeline.sender.PipelineSender;
 import jar.curoerp.module.pipeline.transfer.IPipelineTransferReceiver;
 import jar.curoerp.module.pipeline.transfer.PipelineTransfer;

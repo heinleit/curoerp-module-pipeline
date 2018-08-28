@@ -9,6 +9,7 @@ import jar.curoerp.module.pipeline.helper.PipelineHelper;
 import jar.curoerp.module.pipeline.helper.PipelineRequest;
 import jar.curoerp.module.pipeline.helper.PipelineTag;
 import jar.curoerp.module.pipeline.helper.PipelineType;
+import jar.curoerp.module.pipeline.receptionist.IPipelineReceptionist;
 import jar.curoerp.module.pipeline.transfer.IPipelineTransferReceiver;
 
 public class PipelineProcessor implements IPipelineTransferReceiver {

@@ -1,6 +1,12 @@
 name: Pipeline
 version: 0.0.1
 typeInfos:
- - type: jar.curoerp.module.pipeline.PipelineInvocationHandler
- - type: jar.curoerp.module.pipeline.Pipeline
+ - type: jar.curoerp.module.pipeline.PipelineRegistrar
+   api: jar.curoerp.module.pipeline.IPipelineRegistrar
+ - type: jar.curoerp.module.pipeline.PipelineServerService
+ - type: jar.curoerp.module.pipeline.proxy.ProxyHandler
+ - type: jar.curoerp.module.pipeline.receptionist.PipelineReceptionist
+   api: jar.curoerp.module.pipeline.receptionist.IPipelineReceptionist
+ - type: jar.curoerp.module.pipeline.proxy.PipelineSenderProxy
+   api: jar.curoerp.module.pipeline.proxy.IPipelineSenderProxy
 bootClass: jar.curoerp.module.pipeline.Pipeline

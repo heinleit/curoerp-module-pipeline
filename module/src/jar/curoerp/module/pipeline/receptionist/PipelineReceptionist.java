@@ -7,7 +7,6 @@ import de.curoerp.core.logging.LoggingService;
 import de.curoerp.core.modularity.dependency.IDependencyContainer;
 import de.curoerp.core.modularity.exception.DependencyNotResolvedException;
 import jar.curoerp.module.pipeline.helper.PipelineRequest;
-import jar.curoerp.module.pipeline.processor.IPipelineReceptionist;
 
 public class PipelineReceptionist implements IPipelineReceptionist {
 
