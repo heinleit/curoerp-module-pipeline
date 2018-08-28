@@ -9,6 +9,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import de.curoerp.core.logging.LoggingService;
+
 public class PipelineStorage {
 	
 	/*
@@ -20,8 +22,12 @@ public class PipelineStorage {
 		this.socket = socket;
 	}
 	
-	public void closeSocket() throws IOException {
-		this.socket.close();
+	public void closeSocket() {
+		try {
+			this.socket.close();
+		} catch (IOException e) {
+			LoggingService.error(e);
+		}
 		this.socket = null;
 	}
 	
@@ -121,6 +127,10 @@ public class PipelineStorage {
 		Object object = this.result.get(id);
 		this.result.remove(id);
 		return object;
+	}
+	
+	public String getClientIdentifier() {
+		return this.socket != null ? this.socket.toString() : "nav";
 	}
 	
 }

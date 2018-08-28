@@ -9,4 +9,5 @@ typeInfos:
    api: jar.curoerp.module.pipeline.receptionist.IPipelineReceptionist
  - type: jar.curoerp.module.pipeline.proxy.PipelineSenderProxy
    api: jar.curoerp.module.pipeline.proxy.IPipelineSenderProxy
+ - type: jar.curoerp.module.pipeline.PipelineClientConnector
 bootClass: jar.curoerp.module.pipeline.Pipeline

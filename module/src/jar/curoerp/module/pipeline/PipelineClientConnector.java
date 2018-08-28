@@ -14,7 +14,6 @@ import javax.net.ssl.X509TrustManager;
 
 import de.curoerp.core.logging.LoggingService;
 import jar.curoerp.module.pipeline.proxy.IPipelineSenderProxy;
-import jar.curoerp.module.pipeline.proxy.ProxyHandler;
 import jar.curoerp.module.pipeline.receptionist.IPipelineReceptionist;
 
 public class PipelineClientConnector {

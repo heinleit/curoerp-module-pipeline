@@ -6,7 +6,6 @@ import de.curoerp.core.exception.RuntimeTroubleException;
 import de.curoerp.core.functionality.config.ConfigService;
 import de.curoerp.core.functionality.config.IConfigService;
 import de.curoerp.core.functionality.info.CoreInfo;
-import de.curoerp.core.functionality.info.ICoreInfo;
 import de.curoerp.core.logging.Logging;
 import de.curoerp.core.logging.LoggingLevel;
 import de.curoerp.core.logging.LoggingService;
@@ -21,25 +20,25 @@ import de.curoerp.core.modularity.module.ModuleInfo;
 import de.curoerp.core.modularity.module.TypeInfo;
 import de.curoerp.core.modularity.versioning.VersionInfo;
 
-public class Tester {
+public class ClientTester {
 
-	public static void main(String[] args) throws DependencyNotResolvedException {
+	public static void main(String...strings) throws Exception {
 		// logging / console (everything for debugging)
 		LoggingService.DefaultLogging = new Logging(LoggingLevel.INFO);
-		
+
 		// dependency-container and module-service
 		DependencyContainer container = new DependencyContainer();
 		DependencyService service = new DependencyService(container);
-		CoreInfo cInfo = new CoreInfo("PipelineDemoServer".toLowerCase(), new File("../../test/"));
+		CoreInfo cInfo = new CoreInfo("PipelineDemoClient".toLowerCase(), new File("../../test/"));
 		container.addResolvedDependency(CoreInfo.class, cInfo);
 		ConfigService cfg = new ConfigService(cInfo);
 		container.addResolvedDependency(IConfigService.class, cfg);
-		
+
 		ModuleService modules = new ModuleService(service, container, cInfo);
-		
+
 		// dependencies
 		try {
-			
+
 			// Module: Pipeline
 			ModuleInfo info = new ModuleInfo();
 			info.name = "Pipeline";
@@ -49,9 +48,10 @@ public class Tester {
 					new TypeInfo("jar.curoerp.module.pipeline.proxy.ProxyHandler", ""),
 					new TypeInfo("jar.curoerp.module.pipeline.receptionist.PipelineReceptionist", "jar.curoerp.module.pipeline.receptionist.IPipelineReceptionist"),
 					new TypeInfo("jar.curoerp.module.pipeline.proxy.PipelineSenderProxy", "jar.curoerp.module.pipeline.proxy.IPipelineSenderProxy"),
+					new TypeInfo("jar.curoerp.module.pipeline.PipelineClientConnector", ""),
 			};
 			Module pipeline = new Module(new VersionInfo("1"), info);
-			
+
 			// Module: Pipeline Demo Share
 			info = new ModuleInfo();
 			info.name = "PipelineDemoShared";
@@ -59,19 +59,19 @@ public class Tester {
 					new TypeInfo("jar.curoerp.module.pipeline.shared.BusinessRegistrar", "")
 			};
 			Module pipelineDemoShared = new Module(new VersionInfo("1"), info);
-			
-			// Module: Pipeline Demo Server
+
+			// Module: Pipeline Demo Client
 			info = new ModuleInfo();
-			info.name = "PipelineDemoServer";
+			info.name = "PipelineDemoClient";
 			info.typeInfos = new TypeInfo[] {
-					new TypeInfo("jar.curoerp.module.pipeline.demo.server.ApplePie", "jar.curoerp.module.pipeline.shared.business.IApplePie"),
-					new TypeInfo("jar.curoerp.module.pipeline.server.ServerBoot", "")
+					new TypeInfo("jar.curoerp.module.pipeline.client.PipelineClient", ""),
+					//new TypeInfo("jar.curoerp.module.pipeline.demo.client.ApfelController", "")
 			};
-			info.bootClass = "jar.curoerp.module.pipeline.server.ServerBoot";
+			info.bootClass = "jar.curoerp.module.pipeline.client.PipelineClient";
 			Module pipelineDemoServer = new Module(new VersionInfo("1"), info);
-			
+
 			modules.setModules(new Module[] {pipeline, pipelineDemoShared, pipelineDemoServer});
-			
+
 			// resolve dependencies
 			modules.boot();
 		} catch (RuntimeTroubleException | DependencyLimitationException | ModuleVersionStringInvalidException e) {
@@ -80,13 +80,13 @@ public class Tester {
 		}
 
 		LoggingService.info("DlS started!");
-		
+
 
 		LoggingService.info("Jump into Boot-Module");
-		
+
 		// finally: boot (module: pipeline)
 		try {
-			modules.runModule("PipelineDemoServer".toLowerCase());
+			modules.runModule("PipelineDemoClient".toLowerCase());
 		} catch (RuntimeTroubleException | DependencyNotResolvedException e) {
 			LoggingService.error(e);
 			return;

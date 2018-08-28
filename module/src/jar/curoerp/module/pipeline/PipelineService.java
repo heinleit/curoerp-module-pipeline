@@ -1,6 +1,5 @@
 package jar.curoerp.module.pipeline;
 
-import java.io.IOException;
 import java.net.Socket;
 
 import jar.curoerp.module.pipeline.helper.PipelineRequest;
@@ -8,7 +7,6 @@ import jar.curoerp.module.pipeline.processor.PipelineProcessor;
 import jar.curoerp.module.pipeline.proxy.IProxyRequestListener;
 import jar.curoerp.module.pipeline.receptionist.IPipelineReceptionist;
 import jar.curoerp.module.pipeline.sender.PipelineSender;
-import jar.curoerp.module.pipeline.transfer.IPipelineTransferReceiver;
 import jar.curoerp.module.pipeline.transfer.PipelineTransfer;
 
 public class PipelineService implements IProxyRequestListener {
@@ -54,12 +52,7 @@ public class PipelineService implements IProxyRequestListener {
 	}
 
 	public void close() {
-		try {
-			this.storage.closeSocket();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.storage.closeSocket();
 	}
 
 	@Override

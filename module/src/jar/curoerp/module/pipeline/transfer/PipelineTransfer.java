@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.SocketException;
 import java.util.ArrayList;
 
+import de.curoerp.core.logging.LoggingService;
 import jar.curoerp.module.pipeline.PipelineStorage;
 
 public class PipelineTransfer implements IPipelineTransfer {
@@ -34,23 +36,33 @@ public class PipelineTransfer implements IPipelineTransfer {
 			while(this.storage.isSocketOpen()) {
 				this.storage.solveTrouble();
 				this._isReader = true;
+				this.L("new reader");
 				
 				try {
 					BufferedReader reader = new BufferedReader(new InputStreamReader(this.storage.getSocketInputStream()));
 					String line = null;
-					System.out.println("Wait for new line");
+					//System.out.println("Wait for new line");
 					while((line = reader.readLine()) != null) {
-						System.out.println("New Line: " + line);
+						//System.out.println("New Line: " + line);
 						for (IPipelineTransferReceiver receiver : this.receivers) {
 							receiver.receiveLine(line);
 						}
 					}
 					
-				} catch (IOException e) {
+				}
+				catch (SocketException e) {
+					// client disconnected
+					if(e.getMessage().contains("Connection reset")) {
+						this.storage.closeSocket();
+					}
+				}
+				catch (IOException e) {
 					e.printStackTrace();
 				}
 				this.storage.setTrouble();
 			}
+			
+			this.L("connection closed");
 			this._isReader = false;
 		});
 	}
@@ -71,9 +83,10 @@ public class PipelineTransfer implements IPipelineTransfer {
 					while(true) {
 						next = this.storage.next();
 						if(next != null) {
+							this.L("send line");
 							writer.println(next);
 							writer.flush();
-							System.out.println("Sended: " + next);
+							//System.out.println("Sended: " + next);
 						}
 						Thread.sleep(1000);
 					}
@@ -97,4 +110,7 @@ public class PipelineTransfer implements IPipelineTransfer {
 		this.receivers.add(receiver);
 	}
 
+	private void L(String msg) {
+		LoggingService.info(this.storage.getClientIdentifier() + ":" + msg);
+	}
 }

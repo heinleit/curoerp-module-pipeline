@@ -30,8 +30,6 @@ public class PipelineTag {
 	}
 
 	public boolean match(PipelineTag other) {
-		System.out.println("this:" + this);
-		System.out.println("other:" + other);
 		return this.hash.equalsIgnoreCase(other.hash) 
 				&& this.type == other.type
 				&& this.id == other.id;

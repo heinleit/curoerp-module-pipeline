@@ -3,6 +3,7 @@ package jar.curoerp.module.pipeline.processor;
 import java.io.IOException;
 import java.util.HashMap;
 
+import de.curoerp.core.logging.LoggingService;
 import jar.curoerp.module.pipeline.IPipelineSender;
 import jar.curoerp.module.pipeline.PipelineStorage;
 import jar.curoerp.module.pipeline.helper.PipelineHelper;
@@ -39,7 +40,7 @@ public class PipelineProcessor implements IPipelineTransferReceiver {
 				this.receptionist.info(request);
 				break;
 			case REQUEST:
-				System.out.println("Theres an request: " + request.method);
+				LoggingService.info("Theres an request: " + request.method);
 				Object result = this.receptionist.request(request);
 				this.sender.answer(id.getId(), result);
 				break;
@@ -50,7 +51,6 @@ public class PipelineProcessor implements IPipelineTransferReceiver {
 
 	@Override
 	public void receiveLine(String line) {
-		System.out.println("Get line " + line);
 		try {
 			if(line == null || line.trim().length() == 0) {
 				return;
